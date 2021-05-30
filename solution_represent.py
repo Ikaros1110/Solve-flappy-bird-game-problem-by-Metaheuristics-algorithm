@@ -11,20 +11,17 @@ class solutionRepresent:
         newSolution = list()
         newSolution.append(rm.randint(0,512))  # bird Y point
         newSolution.append((rm.randint(-1000,800))/100) # bird speed
-        pipePair1 = list()
-        pipePair2 = list() #pipi point
-        pipePair1.append(rm.randint(0,288))
-        pipePair1.append(rm.randint(180,320))
-        pipePair2.append(rm.randint(pipePair1[0],288))
-        pipePair2.append(rm.randint(pipePair1[1],320))
-        newSolution.append(pipePair1)
-        newSolution.append(pipePair2)
+        newSolution.append(rm.randint(0,288)) # pipe X point
+        yPair = list()
+        yPair.append(rm.randint(180,320))
+        yPair.append(rm.randint(yPair[0],320))
+        newSolution.append(yPair)
         if rm.randint(0,1) == 1:
             newSolution.append(True)
         else:
             newSolution.append(False)
         self.solution = newSolution
 
-    def print(self):
+    def print(self)-> None:
         for e in self.solution:
             print(e)
