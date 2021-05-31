@@ -15,7 +15,7 @@ class mating:
             pair = []
             while len(pair) < 2:
                 randIndex = sample(range(len(score)), 2)
-                if score[randIndex[0]] >= score[randIndex[1]]: pair.append(data[randIndex[0]])
+                if score[randIndex[0]] <= score[randIndex[1]]: pair.append(data[randIndex[0]])
                 else: pair.append(data[randIndex[1]])
             self.__pairSets.append(pair)
         return self.__pairSets
