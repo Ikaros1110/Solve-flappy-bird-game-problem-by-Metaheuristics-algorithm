@@ -11,7 +11,7 @@ class mating:
         #tournament selection
         n = len(score)
 
-        for i in range(n):
+        for _ in range(n):
             pair = []
             while len(pair) < 2:
                 randIndex = sample(range(len(score)), 2)

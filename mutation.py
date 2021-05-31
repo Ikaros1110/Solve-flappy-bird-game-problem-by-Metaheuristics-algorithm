@@ -3,10 +3,11 @@ import math
 import random
 
 class mutation:
+    
     __newData = []
 
     @staticmethod
-    def _sigmoid(x):
+    def __sigmoid(x):
         return 1 / (1 + math.exp(-x))
 
     def __call__(self, data, upperBound):
@@ -15,7 +16,7 @@ class mutation:
         for val, upper in zip(data, upperBound):
             if type(val)==bool: continue
             else:
-                nd = self._sigmoid(random.random()*2-1)#Do Normal distribution
+                nd = self.__sigmoid(random.random()*2-1)#Do Normal distribution
                 #origin in half place(0.5)
                 diff = nd-0.5
                 self.__newData.append(val+diff*(upper-val))
