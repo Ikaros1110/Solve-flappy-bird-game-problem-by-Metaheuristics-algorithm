@@ -10,6 +10,8 @@ class solutionRepresent:
         else:
             self.solution = solution
     
+    def get_solution(self):
+        return self.solution
 
     def random_generate(self)-> None:
         newSolution = list()
