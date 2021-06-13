@@ -47,6 +47,7 @@ class solutionRepresent:
         else:
             newSolution.append(False)
         return newSolution
+
     def self_evaluate(self):
         EVALUATE = evaluation()
         self.result = EVALUATE(self.solution)
@@ -59,7 +60,7 @@ class solutionRepresent:
         newSolution[-1] = not newSolution[-1]
         return newSolution
 
-    def get_better_flaped_choice(self):
+    def set_better_flaped_choice(self):
         EVALUATE = evaluation()
         newResult = EVALUATE(self.get_change_flaped_solution())
         if newResult > self.result:
@@ -82,8 +83,8 @@ class solutionRepresent:
     
     def write_to_file(self, fileName, append = True):
         openMode = 'a' if append else 'w'
-        f = open(fileName, openMode)
+        f = open('result/'+fileName, openMode)
         for e in self.solution:
-            f.write(e)
+            f.write(str(e)+' ')
         f.write('\n')
         f.close()
