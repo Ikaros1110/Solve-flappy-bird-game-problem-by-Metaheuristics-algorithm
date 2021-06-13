@@ -1,4 +1,5 @@
 import random as rm
+from solution_represent import solutionRepresent
 
 class Reproduction:
     
@@ -7,17 +8,15 @@ class Reproduction:
         self.mother = mother
         
     def random_switch_half(self):
-        datasize = len(self.father)
+        datasize = self.father.get_solution_size()
         samePart = rm.sample(list(i for i in range(datasize)), datasize//2)
         son = list()
         daughter = list()
         for e in range(datasize):
             if (e in samePart):
-                son.append(self.father[e])
-                daughter.append(self.mother[e])
+                son.append(self.father.get_solution()[e])
+                daughter.append(self.mother.get_solution()[e])
             else:
-                son.append(self.mother[e])
-                daughter.append(self.father[e])
-        return son, daughter
-        #self.father = son
-        #self.mother = daughter
+                son.append(self.mother.get_solution()[e])
+                daughter.append(self.father.get_solution()[e])
+        return solutionRepresent(son),  solutionRepresent(daughter)
