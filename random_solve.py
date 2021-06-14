@@ -4,7 +4,7 @@ from solution_represent import solutionRepresent
 from evalution import *
 
 def main():
-    generateNum = 1000
+    generateNum = 500000
     fileName = 'randomGenarate_' + str(generateNum) + '.txt'
     startTime = time.time()
     for _ in range(generateNum):
