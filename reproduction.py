@@ -19,4 +19,4 @@ class Reproduction:
             else:
                 son.append(self.mother.get_solution()[e])
                 daughter.append(self.father.get_solution()[e])
-        return solutionRepresent(son),  solutionRepresent(daughter)
+        return [solutionRepresent(son),  solutionRepresent(daughter)]
