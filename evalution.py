@@ -133,6 +133,7 @@ class miniGame:
         if isFlap:
             birdVelY += birdFlapAccY + (-1) #-14 ,-1 is resist drop (by birdVelY += birdAccY # +1)
         die = check_die()
+        # print('VEL ',birdVelY) # debug
         while not die:
             # Bird Y drop
             birdVelY += birdAccY # +1
@@ -142,7 +143,7 @@ class miniGame:
             elif birdVelY > 10:
                 birdVelY = 10
             precision = 100 # To strengthen motion trajectory
-            for _ in range(precision):
+            for i in range(precision):
                 # Bird Y move
                 birdY += min(birdVelY, 404 - birdY - birdHeight)/precision # min() from source code
                 # Bird X move
@@ -150,7 +151,7 @@ class miniGame:
                 # update die
                 die = check_die()
                 # debug message
-                # print(birdX, birdY)
+                # if i%50 == 0: print(birdX, birdY)
                 if die:
                     break
         # store die state
@@ -158,3 +159,4 @@ class miniGame:
                            'upperPipeLoc':[[pipeLeftX, upperPipeY], [pipeRightX, upperPipeY]],
                            'lowerPipeLoc':[[pipeLeftX, lowerPipeY], [pipeRightX, lowerPipeY]],
                            'screenSize':[screenWidth, screenHeight]}
+        # print(self.__dieState) # debug message
