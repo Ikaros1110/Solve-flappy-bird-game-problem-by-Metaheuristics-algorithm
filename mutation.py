@@ -20,6 +20,7 @@ class mutation:
                 #origin in half place(0.5)
                 diff = nd-0.5
                 self.__newData.append(val+diff*(upper-val))
+        self.__newData.append(data[-1])
         return self.__newData
 
     def test(self, data=[1,2,3,4,5], upperBound=[6,7,8,9,10]):
