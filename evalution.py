@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class evaluation:
     def __init__(self):
         self.data = []
