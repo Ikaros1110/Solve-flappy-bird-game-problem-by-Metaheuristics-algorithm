@@ -31,15 +31,19 @@ class evaluation:
         screenHeight = 512
         ### Complete Partition ###
         existPoint = 0 # store front state point
-        # 1.die in upperPipe bottom
-        if  pipeLeftX <= dieLoc[0] < pipeRightX and upperPipeY-1 <= dieLoc[1] <= upperPipeY+1:
-            return existPoint + dieLoc[0]
-        existPoint += pipeRightX # max dixLoc[0]
 
-        # 2.die in upperPipe left side
+        # 1.die in upperPipe left side
         if pipeLeftX-1 <= dieLoc[0] <= pipeLeftX+1 and dieLoc[1] <= upperPipeY:
             return 300 + existPoint + dieLoc[1] # +300 to ensure dieLoc[1] is minus can run correct(not overlapping).
         existPoint += (300+upperPipeY) # max dieLoc[1]
+
+        # 2.die in upperPipe bottom
+        if  pipeLeftX <= dieLoc[0] < pipeRightX and upperPipeY-1 <= dieLoc[1] <= upperPipeY+1:
+            return existPoint + dieLoc[0]
+        existPoint += pipeRightX # max dixLoc[0]        # 1.die in upperPipe bottom
+        if  pipeLeftX <= dieLoc[0] < pipeRightX and upperPipeY-1 <= dieLoc[1] <= upperPipeY+1:
+            return existPoint + dieLoc[0]
+        existPoint += pipeRightX # max dixLoc[0]
 
         # 3.die in ground before pipe
         if dieLoc[0] <= pipeLeftX and screenHeight-1 <= dieLoc[1] <= screenHeight+1:
@@ -131,10 +135,12 @@ class miniGame:
         ### Simulate ###
         # Bird Y accelerate
         if isFlap:
-            birdVelY = birdFlapAccY #-14 ,-1 is resist drop (by birdVelY += birdAccY # +1)
+            birdVelY = birdFlapAccY -1 #-14 ,-1 is resist drop (by birdVelY += birdAccY # +1)
+            # print(birdX, birdY, birdVelY) # debug
         die = check_die()
         while not die:
             # Bird Y drop
+            # print(birdX, birdY, birdVelY) # debug
             birdVelY += birdAccY # +1
             # check speed in range
             if birdVelY < -8:
@@ -153,8 +159,10 @@ class miniGame:
                 # print(birdX, birdY)
                 if die:
                     break
+            # print(birdX, birdY, birdVelY) # debug
         # store die state
         self.__dieState = {'dieLoc':[birdX, birdY],
                            'upperPipeLoc':[[pipeLeftX, upperPipeY], [pipeRightX, upperPipeY]],
                            'lowerPipeLoc':[[pipeLeftX, lowerPipeY], [pipeRightX, lowerPipeY]],
                            'screenSize':[screenWidth, screenHeight]}
+        print(self.__dieState) # debug
