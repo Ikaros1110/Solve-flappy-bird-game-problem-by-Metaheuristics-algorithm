@@ -1,5 +1,5 @@
 from itertools import cycle
-from mip import solve
+from mip import solve, solveEva
 import random
 import sys
 
@@ -243,8 +243,10 @@ def mainGame(movementInfo):
                     playerFlapped = True
                     SOUNDS['wing'].play()
         #print([playery, upperPipes[0]['x'], lowerPipes[0]['y'], playerVelY])
-        
-        flap, traj = solve([playery, upperPipes[0]['x'], lowerPipes[1]['y'], playerVelY])
+        print("X: ",playerx, " Y: ",playery) # debug
+        print('Upper: ',upperPipes) # debug
+        print('Lower: ',lowerPipes) # debug
+        flap, traj = solveEva([playery, upperPipes[0]['x'], lowerPipes[1]['y']-100, playerVelY])
         if flap:
             playerVelY = playerFlapAcc
             playerFlapped = True

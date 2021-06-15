@@ -15,7 +15,7 @@ class evaluation:
         self.game.play()
 
         #calculate answer
-        return self.target_func(self.game.get_die_state(),debugMode=False)
+        return self.target_func(self.game.get_die_state(),debugMode=True)
 
     @staticmethod
     def target_func(state, debugMode = False):
@@ -65,19 +65,18 @@ class evaluation:
             return existPoint + dieLoc[0]
         existPoint += pipeRightX # max dieLoc[0]
         
+        # 6.die in right screen
+        if screenWidth-1 <= dieLoc[0] <= screenWidth+1:
+            if debugMode: print("7.die in right screen")
+            return existPoint + 100 + dieLoc[1] 
+        existPoint += 100+ screenHeight  # max point
 
-        # 6.die in ground after pipe
+        # 7.die in ground after pipe
         if pipeRightX <= dieLoc[0] <= screenWidth and screenHeight-1 <= dieLoc[1] <= screenHeight+1:
             if debugMode: print("6.die in ground after pipe")
             return 1000 + existPoint - dieLoc[0] # the farther the smaller
         existPoint += 1000 # max vaule added
-        
-
-        # 7.die in right screen
-        if screenWidth-1 <= dieLoc[0] <= screenWidth+1:
-            if debugMode: print("7.die in right screen")
-            return existPoint + 100 + dieLoc[1] 
-        # existPoint += 100+ screenHeight  # max point
+    
 
         # 8.other
         if debugMode: print("8.other")
@@ -113,7 +112,7 @@ class miniGame:
         ### set game parameter ###
         birdX = 0 + 34 # bird width
         birdY = self.__state[0] + 12 # bird half weight
-        birdVelX = 14 # use pipe shirt in origin game
+        birdVelX = 4 # use pipe shirt in origin game
         birdVelY = self.__state[1]
         birdAccY = 1
         birdFlapAccY = -9
@@ -138,7 +137,7 @@ class miniGame:
                 return True
             # hit upper pipe and extend up
             elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
-                birdY = upperPipeY
+                birdY = upperBirdY
                 return True
             # hit lower pipe
             elif pipeLeftX <= birdX <= pipeRightX and lowerPipeY <= lowerBirdY <= screenHeight:
@@ -164,13 +163,11 @@ class miniGame:
             die =  True
         # hit upper pipe and extend up
         elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
-            if upperPipeY-1 <= upperBirdY <=upperPipeY+1: 
-                birdY = upperPipeY
+            birdY = upperBirdY
             die =  True
         # hit lower pipe
         elif pipeLeftX <= birdX <= pipeRightX and lowerPipeY <= lowerBirdY <= screenHeight:
-            if lowerPipeY-1 <= lowerBirdY <=lowerPipeY+1:
-                birdY = lowerBirdY
+            birdY = lowerBirdY
             die = True
         
         while not die:
@@ -199,13 +196,11 @@ class miniGame:
                     die =  True
                 # hit upper pipe and extend up
                 elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
-                    if upperPipeY-1 <= upperBirdY <=upperPipeY+1: 
-                        birdY = upperPipeY
+                    birdY = upperBirdY
                     die =  True
                 # hit lower pipe
                 elif pipeLeftX <= birdX <= pipeRightX and lowerPipeY <= lowerBirdY <= screenHeight:
-                    if lowerPipeY-1 <= lowerBirdY <=lowerPipeY+1:
-                        birdY = lowerBirdY
+                    birdY = lowerBirdY
                     die = True
                 # print(birdX, birdY) # debug message
                 if die:
@@ -217,4 +212,4 @@ class miniGame:
                            'upperPipeLoc':[[pipeLeftX, upperPipeY], [pipeRightX, upperPipeY]],
                            'lowerPipeLoc':[[pipeLeftX, lowerPipeY], [pipeRightX, lowerPipeY]],
                            'screenSize':[screenWidth, screenHeight]}
-        # print(self.__dieState) # debug
+        print(self.__dieState) # debug

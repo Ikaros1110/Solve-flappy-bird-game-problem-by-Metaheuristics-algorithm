@@ -15,4 +15,4 @@ class environmentalSelction:
             newGroup.append(sortParents[e])
             newGroup.append(sortChilds[e])
         return newGroup
-
+    
