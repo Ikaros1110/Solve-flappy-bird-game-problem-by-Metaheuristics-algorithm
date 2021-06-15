@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class evaluation:
     def __init__(self):
         self.data = []
@@ -12,10 +13,10 @@ class evaluation:
 
         #play
         self.game.play()
-        
+
         #calculate answer
         return self.target_func(self.game.get_die_state())
-    
+
     @staticmethod
     def target_func(state):
         #state: key-value list
@@ -83,7 +84,7 @@ class miniGame:
     def set_state(self, data):
         #set game state
         self.__state = data
-    
+
     def get_die_state(self):
         #get game state
         return self.__dieState
@@ -108,11 +109,11 @@ class miniGame:
         pipeRightX = pipeLeftX + 52
         upperPipeY = self.__state[3]
         lowerPipeY = upperPipeY + 100
-        
+
         screenWidth = 288
         screenHeight = 512
         isFlap = self.__state[4]
-        
+
         ### check bird is dead? ###
         def check_die():
             # Out screen , beside up (To use target_function)
