@@ -36,6 +36,3 @@ class mutation:
 
         print("Test done")
 
-mut = mutation()
-mut.test()
-
