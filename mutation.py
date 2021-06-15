@@ -35,4 +35,3 @@ class mutation:
             print("Error: \"__call__\" function can't work")
 
         print("Test done")
-
