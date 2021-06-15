@@ -68,14 +68,6 @@ class evaluation:
 
         # 6.die in ground after pipe
         if pipeRightX <= dieLoc[0] <= screenWidth and screenHeight-1 <= dieLoc[1] <= screenHeight+1:
-<<<<<<< HEAD
-            return 1000 + existPoint - dieLoc[1] # the farther the smaller
-        existPoint += 1000 # max vaule added
-
-        # 7.die in right screen
-        if screenWidth-1 <= dieLoc[0] <= screenWidth+1:
-            # if debugMode: print("7.die in right screen")
-=======
             if debugMode: print("6.die in ground after pipe")
             return 1000 + existPoint - dieLoc[0] # the farther the smaller
         existPoint += 1000 # max vaule added
@@ -84,7 +76,6 @@ class evaluation:
         # 7.die in right screen
         if screenWidth-1 <= dieLoc[0] <= screenWidth+1:
             if debugMode: print("7.die in right screen")
->>>>>>> remotes/origin/Ikaros
             return existPoint + 100 + dieLoc[1] 
         # existPoint += 100+ screenHeight  # max point
 
@@ -139,22 +130,22 @@ class miniGame:
         isFlap = self.__state[4]
 
         ### check bird is dead? ###
-        def check_die(birdY):
-            upperBirdY = birdY - birdHeight//2
-            lowerBirdY = birdY + birdHeight//2
-            # Out screen , beside up (To use target_function)
-            if birdX <= 0 or birdX >= screenWidth or lowerBirdY >=screenHeight:
-                return True
-            # hit upper pipe and extend up
-            elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
-                birdY = upperPipeY
-                return True
-            # hit lower pipe
-            elif pipeLeftX <= birdX <= pipeRightX and lowerPipeY <= lowerBirdY <= screenHeight:
-                birdY = lowerBirdY
-                return True
-            else:
-                return False
+        # def check_die(birdY):
+        #     upperBirdY = birdY - birdHeight//2
+        #     lowerBirdY = birdY + birdHeight//2
+        #     # Out screen , beside up (To use target_function)
+        #     if birdX <= 0 or birdX >= screenWidth or lowerBirdY >=screenHeight:
+        #         return True
+        #     # hit upper pipe and extend up
+        #     elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
+        #         birdY = upperPipeY
+        #         return True
+        #     # hit lower pipe
+        #     elif pipeLeftX <= birdX <= pipeRightX and lowerPipeY <= lowerBirdY <= screenHeight:
+        #         birdY = lowerBirdY
+        #         return True
+        #     else:
+        #         return False
 
         ### Simulate ###
         # Bird Y accelerate
@@ -205,7 +196,7 @@ class miniGame:
                         birdY = lowerBirdY
                     die =  True
                 # hit upper pipe and extend up
-                elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
+                elif pipeLeftX < birdX < pipeRightX and upperBirdY <= upperPipeY:
                     birdY = upperPipeY
                     die =  True
                 # hit lower pipe
@@ -222,8 +213,4 @@ class miniGame:
                            'upperPipeLoc':[[pipeLeftX, upperPipeY], [pipeRightX, upperPipeY]],
                            'lowerPipeLoc':[[pipeLeftX, lowerPipeY], [pipeRightX, lowerPipeY]],
                            'screenSize':[screenWidth, screenHeight]}
-<<<<<<< HEAD
-        #print(self.__dieState) # debug
-=======
         # print(self.__dieState) # debug
->>>>>>> remotes/origin/Ikaros
