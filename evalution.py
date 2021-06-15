@@ -159,6 +159,8 @@ class miniGame:
         lowerBirdY = birdY + birdHeight//2
         # Out screen , beside up (To use target_function)
         if birdX <= 0 or birdX >= screenWidth or lowerBirdY >=screenHeight:
+            if lowerBirdY >=screenHeight:
+                birdY = lowerBirdY
             die =  True
         # hit upper pipe and extend up
         elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
@@ -190,6 +192,8 @@ class miniGame:
                 # I apologize to everyone.
                 # Out screen , beside up (To use target_function)
                 if birdX <= 0 or birdX >= screenWidth or lowerBirdY >=screenHeight:
+                    if lowerBirdY >=screenHeight:
+                        birdY = lowerBirdY
                     die =  True
                 # hit upper pipe and extend up
                 elif pipeLeftX <= birdX <= pipeRightX and upperBirdY <= upperPipeY:
