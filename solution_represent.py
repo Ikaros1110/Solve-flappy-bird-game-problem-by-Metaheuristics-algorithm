@@ -70,6 +70,11 @@ class solutionRepresent:
         if newResult > self.result:
             self.change_self_flaped_solution()
             self.result = newResult
+        elif newResult == self.result:
+            if self.solution[1] == -9:
+                self.solution[-1] = False
+            elif self.solution[1] == 10:
+                self.solution[-1] = True
 
     def self_mutation(self):
         MUTATE = mutation()

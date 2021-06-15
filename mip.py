@@ -32,9 +32,16 @@ def getPipeConstraintsDistance(x, y, lowerPipes):
             constraints += [y >= (pipe['y'] - PIPEGAPSIZE)] # y below upper pipe
             pipe_dist += cvx.abs(pipe['y'] - (PIPEGAPSIZE//2) - (BIRDDIAMETER//2) - y) # add distance from center
     return constraints, pipe_dist
+
 solve = solve()
+
 def solveEva(data):
     data.append(True)
-    solution = solutionRepresent(data)
+    sortData = list(data)
+    sortData[1] = data[3]
+    sortData[2] = data[1]
+    sortData[3] = data[2]
+    solution = solutionRepresent(sortData)
     solution.set_better_flaped_choice()
+    print(solution.get_solution())
     return solution.get_solution()[4], [(0,0), (0,0)]

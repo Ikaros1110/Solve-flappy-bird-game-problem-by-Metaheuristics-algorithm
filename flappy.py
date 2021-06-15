@@ -245,9 +245,9 @@ def mainGame(movementInfo):
         
         state = []
         if playerx < lowerPipes[0]['x'] + IMAGES['player'][0].get_width() / 2:
-            state = [playery, lowerPipes[0]['x'], lowerPipes[0]['y'], playerVelY]
+            state = [playery, lowerPipes[0]['x'], upperPipes[0]['y']+320, playerVelY]
         else: 
-            state = [playery, lowerPipes[1]['x'], lowerPipes[1]['y'], playerVelY]
+            state = [playery, lowerPipes[1]['x'], upperPipes[1]['y']+320, playerVelY]
         print("state=", state)
         flap, traj = solveEva(state)
         if flap:
