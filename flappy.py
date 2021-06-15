@@ -1,10 +1,11 @@
 from itertools import cycle
-from mip import *
+from solve import solve
 import random
 import sys
 
 import pygame
 from pygame.locals import *
+import numpy as np
 
 
 FPS = 30
@@ -49,6 +50,17 @@ PIPES_LIST = (
     'assets/sprites/pipe-red.png',
 )
 
+def solveEva(data):
+    data.append(True)
+    sortData = list(data)
+    sortData[1] = data[3]
+    sortData[2] = data[1]
+    sortData[3] = data[2]
+    solution = solutionRepresent(sortData)
+    solution.set_better_flaped_choice()
+    print(solution.get_solution())
+    return solution.get_solution()[4], [(0,0), (0,0)]
+
 
 try:
     xrange
@@ -56,7 +68,7 @@ except NameError:
     xrange = range
 
 
-def main():
+def mainFlappy(fileName, times):
     global SCREEN, FPSCLOCK
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
@@ -96,7 +108,9 @@ def main():
     SOUNDS['swoosh'] = pygame.mixer.Sound('assets/audio/swoosh' + soundExt)
     SOUNDS['wing']   = pygame.mixer.Sound('assets/audio/wing' + soundExt)
 
-    while True:
+    scores = []
+    solved = solve(fileName)
+    for _ in range(times):
         # select random background sprites
         randBg = random.randint(0, len(BACKGROUNDS_LIST) - 1)
         IMAGES['background'] = pygame.image.load(BACKGROUNDS_LIST[randBg]).convert()
@@ -129,11 +143,11 @@ def main():
             getHitmask(IMAGES['player'][1]),
             getHitmask(IMAGES['player'][2]),
         )
-
         movementInfo = showWelcomeAnimation()
-        crashInfo = mainGame(movementInfo)
+        crashInfo, score = mainGame(movementInfo, solved)
+        scores.append(score)
         showGameOverScreen(crashInfo)
-
+    return np.mean(scores)
 
 def showWelcomeAnimation():
     """Shows welcome screen animation of flappy bird"""
@@ -186,6 +200,11 @@ def showWelcomeAnimation():
 
         pygame.display.update()
         FPSCLOCK.tick(FPS)
+        return {
+                    'playery': playery + playerShmVals['val'],
+                    'basex': basex,
+                    'playerIndexGen': playerIndexGen,
+                }
 
 def showTrainingInfo(data):
     playerVelY    =  data[0]   # player's velocity along Y, default same as playerFlapped
@@ -193,7 +212,7 @@ def showTrainingInfo(data):
     playerMinVelY =  data[2]   # min vel along Y, max ascend speed
     playerAccY    =  data[3]   # players downward accleration
 
-def mainGame(movementInfo):
+def mainGame(movementInfo, solve):
     score = playerIndex = loopIter = 0
     playerIndexGen = movementInfo['playerIndexGen']
     playerx, playery = int(SCREENWIDTH * 0.2), movementInfo['playery']
@@ -249,7 +268,7 @@ def mainGame(movementInfo):
         else: 
             state = [playery, lowerPipes[1]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[1]['y']-75, playerVelY]
         print("state=", state)
-        flap, traj = solveEva(state)
+        flap, traj = solve(state)
         if flap:
             playerVelY = playerFlapAcc
             playerFlapped = True
@@ -268,7 +287,7 @@ def mainGame(movementInfo):
                 'score': score,
                 'playerVelY': playerVelY,
                 'playerRot': playerRot
-            }
+            }, score
 
         # check for score
         playerMidPos = playerx + IMAGES['player'][0].get_width() / 2
@@ -407,6 +426,7 @@ def showGameOverScreen(crashInfo):
 
         FPSCLOCK.tick(FPS)
         pygame.display.update()
+        return
 
 
 def playerShm(playerShm):
@@ -510,4 +530,4 @@ def getHitmask(image):
     return mask
 
 if __name__ == '__main__':
-    main()
+    mainFlappy("database.txt", 10)

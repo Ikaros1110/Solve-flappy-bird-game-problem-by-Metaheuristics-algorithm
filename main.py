@@ -11,8 +11,8 @@ def pair_combination(peoplePair, size):
 
 def main():
     ### set parameter ###
-    groupSize = 20
-    generateTimes = 10
+    groupSize = 1000
+    generateTimes = 1000
     print("Size: ",groupSize,"Times: ",generateTimes)
     ### initilze group ###
     group = []
@@ -30,8 +30,8 @@ def main():
         for i in range(groupSize//2):
             parentREPRODUCT = Reproduction(parentsPair[i][0], parentsPair[i][1])
             newChildPair = parentREPRODUCT.random_switch_half()
-            # newChildPair[0].self_mutation()
-            # newChildPair[1].self_mutation()
+            newChildPair[0].self_mutation()
+            newChildPair[1].self_mutation()
             childs.append(newChildPair[0])
             childs.append(newChildPair[1])
         ES = environmentalSelction(parents, childs)

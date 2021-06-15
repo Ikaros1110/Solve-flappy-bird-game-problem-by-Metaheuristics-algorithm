@@ -1,8 +1,8 @@
 class solve:
-    def __init__(self):
+    def __init__(self, fileName):
         self.__ans = False #default ans
         self.__lines = []
-        with open('database.txt') as f:
+        with open(fileName) as f:
             for line in f.readlines():
                 self.__lineParse(line.split())
         self.__lines.sort()

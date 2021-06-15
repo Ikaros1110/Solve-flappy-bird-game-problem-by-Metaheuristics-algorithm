@@ -8,8 +8,8 @@ def writeFile(data, fileName, openMode = 'a'):
     f.close()
 
 def main():
-    numList = [10000, 20000, 25000, 50000, 100000, 500000, 1000000]
-    version = '_ver2'
+    numList = [10000]
+    version = '_ver3'
     for generateNum in numList:
         print("GenerateNum: ",generateNum)
         fileName = 'randomGenerate/randomGenerate_' + str(generateNum) + version + '.txt'
