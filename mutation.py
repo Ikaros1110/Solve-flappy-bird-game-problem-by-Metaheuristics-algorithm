@@ -21,17 +21,11 @@ class mutation:
                 nd = self.__sigmoid(random.random()*2-1)#Do Normal distribution
                 #origin in half place(0.5)
                 diff = nd-0.5
-<<<<<<< HEAD
                 __newData.append(val+diff*(upper-val))
         __newData[0] = round(__newData[0])
         __newData[1] = round(__newData[1])
         __newData[2] = round(__newData[2])
         return __newData
-=======
-                self.__newData.append(val+diff*(upper-val))
-        self.__newData.append(data[-1])
-        return self.__newData
->>>>>>> remotes/origin/Ikaros
 
     def test(self, data=[1,2,3,4,True], upperBound=[6,7,8,9,True]):
         try:

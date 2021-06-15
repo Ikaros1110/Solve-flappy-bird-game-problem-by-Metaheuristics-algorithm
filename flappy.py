@@ -1,5 +1,5 @@
 from itertools import cycle
-from mip import solve
+from mip import *
 import random
 import sys
 
@@ -242,9 +242,14 @@ def mainGame(movementInfo):
                     playerVelY = playerFlapAcc
                     playerFlapped = True
                     SOUNDS['wing'].play()
-        #print([playery, upperPipes[0]['x'], lowerPipes[0]['y'], playerVelY])
         
-        flap, traj = solve([playery, upperPipes[0]['x'], lowerPipes[1]['y'], playerVelY])
+        state = []
+        if playerx < lowerPipes[0]['x'] + IMAGES['player'][0].get_width() / 2:
+            state = [playery, lowerPipes[0]['x'], lowerPipes[0]['y'], playerVelY]
+        else: 
+            state = [playery, lowerPipes[1]['x'], lowerPipes[1]['y'], playerVelY]
+        print("state=", state)
+        flap, traj = solveEva(state)
         if flap:
             playerVelY = playerFlapAcc
             playerFlapped = True
