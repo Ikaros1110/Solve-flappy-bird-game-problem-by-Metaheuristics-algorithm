@@ -42,6 +42,6 @@ def main():
             e.write_to_file(fileName)
     print('OK')
 
-    
+
 if __name__ == '__main__':
     main()

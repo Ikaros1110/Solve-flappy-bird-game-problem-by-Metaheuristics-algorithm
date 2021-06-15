@@ -13,10 +13,10 @@ class evaluation:
 
         #play
         self.game.play()
-        
+
         #calculate answer
         return self.target_func(self.game.get_die_state())
-    
+
     @staticmethod
     def target_func(state):
         #state: key-value list
@@ -84,7 +84,7 @@ class miniGame:
     def set_state(self, data):
         #set game state
         self.__state = data
-    
+
     def get_die_state(self):
         #get game state
         return self.__dieState
@@ -102,18 +102,18 @@ class miniGame:
         birdVelX = 14 # use pipe shirt in origin game
         birdVelY = self.__state[1]
         birdAccY = 1
-        birdFlapAccY = -14
+        birdFlapAccY = -9
         birdHeight = 24
 
         pipeLeftX = self.__state[2]
         pipeRightX = pipeLeftX + 52
         upperPipeY = self.__state[3]
         lowerPipeY = upperPipeY + 100
-        
+
         screenWidth = 288
         screenHeight = 512
         isFlap = self.__state[4]
-        
+
         ### check bird is dead? ###
         def check_die():
             # Out screen , beside up (To use target_function)
@@ -131,9 +131,8 @@ class miniGame:
         ### Simulate ###
         # Bird Y accelerate
         if isFlap:
-            birdVelY += birdFlapAccY + (-1) #-14 ,-1 is resist drop (by birdVelY += birdAccY # +1)
+            birdVelY = birdFlapAccY #-14 ,-1 is resist drop (by birdVelY += birdAccY # +1)
         die = check_die()
-        # print('VEL ',birdVelY) # debug
         while not die:
             # Bird Y drop
             birdVelY += birdAccY # +1
@@ -143,7 +142,7 @@ class miniGame:
             elif birdVelY > 10:
                 birdVelY = 10
             precision = 100 # To strengthen motion trajectory
-            for i in range(precision):
+            for _ in range(precision):
                 # Bird Y move
                 birdY += min(birdVelY, 404 - birdY - birdHeight)/precision # min() from source code
                 # Bird X move
@@ -151,7 +150,7 @@ class miniGame:
                 # update die
                 die = check_die()
                 # debug message
-                # if i%50 == 0: print(birdX, birdY)
+                # print(birdX, birdY)
                 if die:
                     break
         # store die state
@@ -159,4 +158,3 @@ class miniGame:
                            'upperPipeLoc':[[pipeLeftX, upperPipeY], [pipeRightX, upperPipeY]],
                            'lowerPipeLoc':[[pipeLeftX, lowerPipeY], [pipeRightX, lowerPipeY]],
                            'screenSize':[screenWidth, screenHeight]}
-        # print(self.__dieState) # debug message

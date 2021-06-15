@@ -6,7 +6,7 @@ class solutionRepresent:
     # data    [bird Y , bird speed, pipe X, pipe Y,  isFlap ]
     # type     int      float       int     int      boolen
     # range    0~512    %.2f -8~10  0~288   142~404  True / False
-    
+
     def __init__(self, solution = 0, NONE = False) -> None:
         if NONE:
             self.solution = []
@@ -19,7 +19,7 @@ class solutionRepresent:
             self.solution = solution
             EVALUATE = evaluation()
             self.result = EVALUATE(self.solution)
-    
+
     def __str__(self) -> str:
         return str(self.solution)+' '+str(self.result)
 
@@ -44,7 +44,7 @@ class solutionRepresent:
         newSolution.append((rm.randint(-800,1000))/100) # bird speed
         newSolution.append(rm.randint(0,288)) # pipe X point
         newSolution.append(rm.randint(142,404)) # lower pipe Y point , gap size is 100
-        # 142~404 base on origin getRandomPipe() 
+        # 142~404 base on origin getRandomPipe()
         if rm.randint(0,1) == 1:
             newSolution.append(True)
         else:
@@ -85,7 +85,7 @@ class solutionRepresent:
                 print(e)
         else:
             print(self.solution)
-    
+
     def write_to_file(self, fileName):
         f = open('result/'+fileName, 'a')
         writeData = list(self.get_solution())
