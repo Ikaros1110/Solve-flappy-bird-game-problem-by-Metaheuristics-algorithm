@@ -70,6 +70,8 @@ class solutionRepresent:
         if newResult > self.result:
             self.change_self_flaped_solution()
             self.result = newResult
+        elif newResult == self.result:
+            self.solution[-1] = False
 
     def self_mutation(self):
         MUTATE = mutation()
