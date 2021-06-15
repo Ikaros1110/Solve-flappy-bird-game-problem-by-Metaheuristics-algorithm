@@ -244,10 +244,10 @@ def mainGame(movementInfo):
                     SOUNDS['wing'].play()
         
         state = []
-        if playerx < lowerPipes[0]['x'] + IMAGES['player'][0].get_width() / 2:
-            state = [playery, lowerPipes[0]['x'], upperPipes[0]['y']+320, playerVelY]
+        if playerx < lowerPipes[0]['x'] + IMAGES['pipe'][0].get_width():
+            state = [playery, lowerPipes[0]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[0]['y']-75, playerVelY]
         else: 
-            state = [playery, lowerPipes[1]['x'], upperPipes[1]['y']+320, playerVelY]
+            state = [playery, lowerPipes[1]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[1]['y']-75, playerVelY]
         print("state=", state)
         flap, traj = solveEva(state)
         if flap:

@@ -62,13 +62,14 @@ class evaluation:
 
         # 6.die in ground after pipe
         if pipeRightX <= dieLoc[0] <= screenWidth and screenHeight-1 <= dieLoc[1] <= screenHeight+1:
-            return existPoint + dieLoc[1]
-        existPoint += screenWidth # max dieLoc[0]
+            return 1000 + existPoint - dieLoc[1] # the farther the smaller
+        existPoint += 1000 # max vaule added
 
         # 7.die in right screen
         if screenWidth-1 <= dieLoc[0] <= screenWidth+1:
-            return existPoint + (screenHeight - dieLoc[1]) # direct in contrast
-        # existPoint += screenHeight  # max point
+            # if debugMode: print("7.die in right screen")
+            return existPoint + 100 + dieLoc[1] 
+        # existPoint += 100+ screenHeight  # max point
 
         # 8.other
         return 0
@@ -101,7 +102,7 @@ class miniGame:
         # pipe  width is 52(form spirit/pipe.png), two pipe gap is 100 (from origin source code).
 
         ### set game parameter ###
-        birdX = 0 + 34 # bird width
+        birdX = 57
         birdY = self.__state[0] + 12 # bird half weight
         birdVelX = 14 # use pipe shirt in origin game
         birdVelY = self.__state[1]
@@ -165,4 +166,4 @@ class miniGame:
                            'upperPipeLoc':[[pipeLeftX, upperPipeY], [pipeRightX, upperPipeY]],
                            'lowerPipeLoc':[[pipeLeftX, lowerPipeY], [pipeRightX, lowerPipeY]],
                            'screenSize':[screenWidth, screenHeight]}
-        print(self.__dieState) # debug
+        #print(self.__dieState) # debug
