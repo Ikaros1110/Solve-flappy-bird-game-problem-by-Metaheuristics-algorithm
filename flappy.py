@@ -268,8 +268,8 @@ def mainGame(movementInfo, solve):
             state = [playery, lowerPipes[0]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[0]['y']-75, playerVelY]
         else: 
             state = [playery, lowerPipes[1]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[1]['y']-75, playerVelY]
-        print("state=", state)
-        flap, traj = solveEva(state)
+        #print("state=", state)
+        flap, traj = solve(state)
         if flap:
             playerVelY = playerFlapAcc
             playerFlapped = True
@@ -478,6 +478,8 @@ def checkCrash(player, upperPipes, lowerPipes):
 
     # if player crashes into ground
     if player['y'] + player['h'] >= BASEY - 1:
+        return [True, True]
+    elif player['y'] < -32:
         return [True, True]
     else:
 
