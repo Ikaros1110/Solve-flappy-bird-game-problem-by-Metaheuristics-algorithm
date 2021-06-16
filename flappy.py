@@ -6,6 +6,7 @@ import sys
 import pygame
 from pygame.locals import *
 import numpy as np
+from solution_represent import solutionRepresent
 
 
 FPS = 30
@@ -268,7 +269,7 @@ def mainGame(movementInfo, solve):
         else: 
             state = [playery, lowerPipes[1]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[1]['y']-75, playerVelY]
         print("state=", state)
-        flap, traj = solve(state)
+        flap, traj = solveEva(state)
         if flap:
             playerVelY = playerFlapAcc
             playerFlapped = True
