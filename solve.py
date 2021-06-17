@@ -6,7 +6,7 @@ class solve:
             for line in f.readlines():
                 self.__lineParse(line.split())
         self.__lines.sort()
-        
+
     def __call__(self, data):
         #binary search: O(logn)
         index = len(self.__lines)//2
@@ -14,10 +14,10 @@ class solve:
         upper = len(self.__lines)-1
         for i in range(len(self.__lines[0])-1):
             for j in range(1000):
-                if data[i] > self.__lines[index][i]: 
+                if data[i] > self.__lines[index][i]:
                     lower = index
                     index += (upper-index)//2
-                elif data[i] < self.__lines[index][i]: 
+                elif data[i] < self.__lines[index][i]:
                     upper = index
                     index -= (index-lower)//2
                 else: break

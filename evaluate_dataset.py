@@ -9,13 +9,13 @@ def write_to_file(fileName, message, openMode = 'a'):
     f.close()
 
 def evaluate_GA_dataset(version, groupSize, generateTimes, dataIndex ,playTimes = 10):
-    versionStr = 'Ver' +str(version) 
+    versionStr = 'Ver' +str(version)
     datasetType = 'GA'
     readFileName = 'result/GA/'+ versionStr + '_' + datasetType + '_' + str(groupSize) + '_'+ str(generateTimes) + '_' + str(dataIndex) +'.txt'
     return mainFlappy(readFileName, playTimes)
 
 def evaluate_RD_dataset(version, dataNum, dataIndex ,playTimes = 10):
-    versionStr = 'Ver' +str(version) 
+    versionStr = 'Ver' +str(version)
     datasetType = 'randomGenerate'
     readFileName = 'result/RD/'+ versionStr + '_' + datasetType + '_' +str(dataNum)+ '_' + str(dataIndex) +'.txt'
     return mainFlappy(readFileName, playTimes)
@@ -35,7 +35,7 @@ def main():
         message += str(resultList) +'\n'
         message += str(sum(resultList)/len(resultList)) + '\n\n'
         write_to_file(writeRDFileName, message)
-    
+
     # writeGAFileName = 'result/GA_evaluate_dataset.txt'
     # for groupSize in [200, 500, 1000]:
     #     for generateTimes in [50, 100]:

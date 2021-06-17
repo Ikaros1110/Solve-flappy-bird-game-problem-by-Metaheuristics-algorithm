@@ -256,17 +256,17 @@ def mainGame(movementInfo, solve):
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-            
+
             if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
                 if playery > -2 * IMAGES['player'][0].get_height():
                     playerVelY = playerFlapAcc
                     playerFlapped = True
                     SOUNDS['wing'].play()
-        
+
         state = []
         if playerx < lowerPipes[0]['x'] + IMAGES['pipe'][0].get_width():
             state = [playery, lowerPipes[0]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[0]['y']-75, playerVelY]
-        else: 
+        else:
             state = [playery, lowerPipes[1]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[1]['y']-75, playerVelY]
         # print("state=", state) # debug
         flap, traj = solveEva(state)
@@ -352,7 +352,7 @@ def mainGame(movementInfo, solve):
         visibleRot = playerRotThr
         if playerRot <= playerRotThr:
             visibleRot = playerRot
-        
+
         playerSurface = pygame.transform.rotate(IMAGES['player'][playerIndex], visibleRot)
         SCREEN.blit(playerSurface, (playerx, playery))
 
@@ -418,7 +418,7 @@ def showGameOverScreen(crashInfo):
         SCREEN.blit(IMAGES['base'], (basex, BASEY))
         showScore(score)
 
-        
+
 
 
         playerSurface = pygame.transform.rotate(IMAGES['player'][1], playerRot)
@@ -478,6 +478,8 @@ def checkCrash(player, upperPipes, lowerPipes):
 
     # if player crashes into ground
     if player['y'] + player['h'] >= BASEY - 1:
+        return [True, True]
+    elif player['y'] < -32:
         return [True, True]
     else:
 
