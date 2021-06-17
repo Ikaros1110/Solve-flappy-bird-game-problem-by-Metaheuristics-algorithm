@@ -59,7 +59,7 @@ def solveEva(data):
     sortData[3] = data[2]
     solution = solutionRepresent(sortData)
     solution.set_better_flaped_choice()
-    print(solution.get_solution())
+    # print(solution.get_solution()) # debug
     return solution.get_solution()[4], [(0,0), (0,0)]
 
 
@@ -268,7 +268,7 @@ def mainGame(movementInfo, solve):
             state = [playery, lowerPipes[0]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[0]['y']-75, playerVelY]
         else: 
             state = [playery, lowerPipes[1]['x'] + IMAGES['pipe'][0].get_width(), lowerPipes[1]['y']-75, playerVelY]
-        print("state=", state)
+        # print("state=", state) # debug
         flap, traj = solveEva(state)
         if flap:
             playerVelY = playerFlapAcc
@@ -296,7 +296,7 @@ def mainGame(movementInfo, solve):
             pipeMidPos = pipe['x'] + IMAGES['pipe'][0].get_width() / 2
             if pipeMidPos <= playerMidPos < pipeMidPos + 4:
                 score += 1
-                print(score)
+                # print(score) # debug
                 SOUNDS['point'].play()
 
         # playerIndex basex change
