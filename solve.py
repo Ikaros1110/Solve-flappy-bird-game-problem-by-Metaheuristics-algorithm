@@ -21,7 +21,7 @@ class solve:
                     upper = index
                     index -= (index-lower)//2
                 else: break
-        print(self.__lines[index])
+        # print(self.__lines[index]) # debug
         return self.__lines[index][4], [(0,0), (0,0)]
 
     def __lineParse(self, line):
