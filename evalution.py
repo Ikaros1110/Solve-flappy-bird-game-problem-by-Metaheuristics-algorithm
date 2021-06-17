@@ -40,10 +40,7 @@ class evaluation:
         # 2.die in upperPipe bottom
         if  pipeLeftX <= dieLoc[0] < pipeRightX and upperPipeY-1 <= dieLoc[1] <= upperPipeY+1:
             return existPoint + dieLoc[0]
-        existPoint += pipeRightX # max dixLoc[0]        # 1.die in upperPipe bottom
-        if  pipeLeftX <= dieLoc[0] < pipeRightX and upperPipeY-1 <= dieLoc[1] <= upperPipeY+1:
-            return existPoint + dieLoc[0]
-        existPoint += pipeRightX # max dixLoc[0]
+        existPoint += pipeRightX # max dixLoc[0]     
 
         # 3.die in ground before pipe
         if dieLoc[0] <= pipeLeftX and screenHeight-1 <= dieLoc[1] <= screenHeight+1:
@@ -62,7 +59,7 @@ class evaluation:
 
         # 6.die in ground after pipe
         if pipeRightX <= dieLoc[0] <= screenWidth and screenHeight-1 <= dieLoc[1] <= screenHeight+1:
-            return 1000 + existPoint - dieLoc[1] # the farther the smaller
+            return 1000 + existPoint - dieLoc[0] 
         existPoint += 1000 # max vaule added
 
         # 7.die in right screen
@@ -74,9 +71,9 @@ class evaluation:
         # 8.other
         return 0
 
+        # Old version
         # distance = np.math.sqrt(pow(dieLoc[0]-pipeLoc[0],2)+pow(dieLoc[1]-pipeLoc[1], 2))# distance of crashed to pipe left-up corner
         # xDiff = dieLoc[0]-pipeLoc[0]# x coordinate differ
-
         # return distance, xDiff
 
 
